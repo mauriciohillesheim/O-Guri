@@ -1,0 +1,10 @@
+<!DOCTYPE svg>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#f8f9fa" />
+  <circle cx="100" cy="100" r="70" fill="#ff6b35" opacity="0.2" />
+  <circle cx="100" cy="100" r="50" fill="#ff6b35" opacity="0.4" />
+  <path d="M70,80 L130,80 L130,120 L70,120 Z" fill="#ff6b35" />
+  <path d="M60,70 L140,70 L140,80 L60,80 Z" fill="#ff6b35" />
+  <path d="M80,120 L120,120 L120,140 L80,140 Z" fill="#ff6b35" />
+  <text x="100" y="170" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Produto</text>
+</svg>

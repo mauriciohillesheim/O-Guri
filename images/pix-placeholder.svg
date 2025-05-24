@@ -1,0 +1,34 @@
+<!DOCTYPE svg>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#f8f9fa" />
+  <rect x="25" y="25" width="150" height="150" fill="#2ec4b6" opacity="0.1" />
+  
+  <!-- Código QR estilizado -->
+  <g transform="translate(50, 50)">
+    <rect width="100" height="100" fill="#fff" stroke="#333" stroke-width="2" />
+    
+    <!-- Padrões do QR Code -->
+    <rect x="10" y="10" width="10" height="10" fill="#333" />
+    <rect x="30" y="10" width="10" height="10" fill="#333" />
+    <rect x="50" y="10" width="10" height="10" fill="#333" />
+    <rect x="70" y="10" width="10" height="10" fill="#333" />
+    
+    <rect x="10" y="30" width="10" height="10" fill="#333" />
+    <rect x="30" y="30" width="10" height="10" fill="#333" />
+    <rect x="50" y="30" width="10" height="10" fill="#333" />
+    <rect x="70" y="30" width="10" height="10" fill="#333" />
+    
+    <rect x="10" y="50" width="10" height="10" fill="#333" />
+    <rect x="30" y="50" width="10" height="10" fill="#333" />
+    <rect x="50" y="50" width="10" height="10" fill="#333" />
+    <rect x="70" y="50" width="10" height="10" fill="#333" />
+    
+    <rect x="10" y="70" width="10" height="10" fill="#333" />
+    <rect x="30" y="70" width="10" height="10" fill="#333" />
+    <rect x="50" y="70" width="10" height="10" fill="#333" />
+    <rect x="70" y="70" width="10" height="10" fill="#333" />
+  </g>
+  
+  <!-- Texto -->
+  <text x="100" y="170" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">PIX</text>
+</svg>

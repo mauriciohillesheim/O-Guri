@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 O Guri - Seu Comprador Pessoal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>🛒 O Guri</h1>
+                </a>
+                <p class="tagline">Seu comprador pessoal</p>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-section="home">Início</a></li>
+                    <li><a href="#" class="nav-link" data-section="products">Produtos</a></li>
+                    <li><a href="#" class="nav-link" data-section="how-it-works">Como Funciona</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-cart" id="btn-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="btn-user" id="btn-user">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="btn-menu" id="btn-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <h2>Menu</h2>
+            <button class="btn-close" id="btn-close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#" class="mobile-nav-link" data-section="home">Início</a></li>
+            <li><a href="#" class="mobile-nav-link" data-section="products">Produtos</a></li>
+            <li><a href="#" class="mobile-nav-link" data-section="how-it-works">Como Funciona</a></li>
+            <li><a href="#" class="mobile-nav-link" data-section="login">Entrar</a></li>
+            <li><a href="#" class="mobile-nav-link" data-section="register">Cadastrar</a></li>
+        </ul>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Seu Carrinho</h2>
+            <button class="btn-close" id="btn-close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Seu carrinho está vazio</p>
+                <button class="btn btn-primary" id="btn-start-shopping">Começar a Comprar</button>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Taxa de Serviço:</span>
+                    <span id="cart-fee">R$ 0,00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="cart-total">R$ 0,00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-checkout" id="btn-checkout">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="user-modal-title">Entrar</h2>
+                <button class="btn-close" id="btn-close-user-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <p class="form-switch">Não tem uma conta? <a href="#" id="switch-to-register">Cadastre-se</a></p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="register-name">Nome Completo</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Senha</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Telefone</label>
+                        <input type="tel" id="register-phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <p class="form-switch">Já tem uma conta? <a href="#" id="switch-to-login">Entrar</a></p>
+                </form>
+
+                <!-- User Profile -->
+                <div id="user-profile" style="display: none;">
+                    <div class="user-info">
+                        <h3 id="profile-name">Nome do Usuário</h3>
+                        <p id="profile-email">email@exemplo.com</p>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-secondary" id="btn-view-orders">Meus Pedidos</button>
+                        <button class="btn btn-secondary" id="btn-edit-profile">Editar Perfil</button>
+                        <button class="btn btn-danger" id="btn-logout">Sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Finalizar Pedido</h2>
+                <button class="btn-close" id="btn-close-checkout-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="checkout-form">
+                    <div class="checkout-sections">
+                        <div class="checkout-section active" id="address-section">
+                            <h3>Endereço de Entrega</h3>
+                            <div class="form-group">
+                                <label for="checkout-address">Endereço Completo</label>
+                                <input type="text" id="checkout-address" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="checkout-city">Cidade</label>
+                                    <input type="text" id="checkout-city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="checkout-state">Estado</label>
+                                    <input type="text" id="checkout-state" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout-zipcode">CEP</label>
+                                <input type="text" id="checkout-zipcode" required>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-next" data-next="payment-section">Continuar para Pagamento</button>
+                        </div>
+
+                        <div class="checkout-section" id="payment-section">
+                            <h3>Método de Pagamento</h3>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" name="payment-method" id="credit-card" value="credit_card" checked>
+                                    <label for="credit-card">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Cartão de Crédito</span>
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" name="payment-method" id="pix" value="pix">
+                                    <label for="pix">
+                                        <i class="fas fa-qrcode"></i>
+                                        <span>PIX</span>
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" name="payment-method" id="boleto" value="boleto">
+                                    <label for="boleto">
+                                        <i class="fas fa-barcode"></i>
+                                        <span>Boleto</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Credit Card Form -->
+                            <div class="payment-form" id="credit-card-form">
+                                <div class="form-group">
+                                    <label for="card-number">Número do Cartão</label>
+                                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-expiry">Validade</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/AA">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="text" id="card-cvv" placeholder="123">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-name">Nome no Cartão</label>
+                                    <input type="text" id="card-name">
+                                </div>
+                            </div>
+
+                            <!-- PIX Form -->
+                            <div class="payment-form" id="pix-form" style="display: none;">
+                                <div class="pix-info">
+                                    <p>Ao finalizar o pedido, você receberá um QR Code para pagamento via PIX.</p>
+                                </div>
+                            </div>
+
+                            <!-- Boleto Form -->
+                            <div class="payment-form" id="boleto-form" style="display: none;">
+                                <div class="boleto-info">
+                                    <p>Ao finalizar o pedido, você receberá um boleto para pagamento.</p>
+                                    <p>O prazo de entrega começa a contar após a confirmação do pagamento.</p>
+                                </div>
+                            </div>
+
+                            <div class="checkout-actions">
+                                <button type="button" class="btn btn-secondary btn-back" data-back="address-section">Voltar</button>
+                                <button type="button" class="btn btn-primary btn-next" data-next="summary-section">Revisar Pedido</button>
+                            </div>
+                        </div>
+
+                        <div class="checkout-section" id="summary-section">
+                            <h3>Resumo do Pedido</h3>
+                            <div class="order-summary">
+                                <div class="summary-items" id="summary-items">
+                                    <!-- Order items will be added here dynamically -->
+                                </div>
+                                <div class="summary-totals">
+                                    <div class="summary-row">
+                                        <span>Subtotal:</span>
+                                        <span id="summary-subtotal">R$ 0,00</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Taxa de Serviço:</span>
+                                        <span id="summary-fee">R$ 0,00</span>
+                                    </div>
+                                    <div class="summary-row total">
+                                        <span>Total:</span>
+                                        <span id="summary-total">R$ 0,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-actions">
+                                <button type="button" class="btn btn-secondary btn-back" data-back="payment-section">Voltar</button>
+                                <button type="submit" class="btn btn-primary">Finalizar Compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="order-confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Pedido Confirmado!</h2>
+                <button class="btn-close" id="btn-close-confirmation-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-animation">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Obrigado pela sua compra!</h3>
+                <p>Seu pedido foi recebido e está sendo processado.</p>
+                <div class="order-details">
+                    <p><strong>Número do Pedido:</strong> <span id="confirmation-order-id"></span></p>
+                    <p><strong>Total:</strong> <span id="confirmation-total"></span></p>
+                </div>
+                <div class="payment-instructions" id="payment-instructions">
+                    <!-- Payment instructions will be added here dynamically -->
+                </div>
+                <button class="btn btn-primary" id="btn-continue-shopping">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Deixe as compras com <span class="highlight">O Guri</span></h1>
+                    <p class="hero-description">Seu comprador pessoal para fazer as compras do mercado enquanto você aproveita seu tempo com o que realmente importa.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg" id="btn-hero-shop">Fazer Pedido</button>
+                        <button class="btn btn-secondary btn-lg" id="btn-hero-learn">Como Funciona</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/hero-placeholder.svg" alt="O Guri - Seu comprador pessoal">
+                </div>
+            </div>
+            <div class="hero-wave">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Como Funciona</h2>
+                    <p class="section-description">Fazer compras nunca foi tão fácil. Veja como o Guri pode ajudar você.</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                        <h3>Escolha os Produtos</h3>
+                        <p>Selecione os produtos que deseja comprar em nossa plataforma.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Informe o Endereço</h3>
+                        <p>Indique onde você quer receber suas compras.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3>Faça o Pagamento</h3>
+                        <p>Escolha entre cartão, PIX ou boleto para pagar.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>Receba em Casa</h3>
+                        <p>O Guri faz as compras e entrega no seu endereço.</p>
+                    </div>
+                </div>
+                <div class="how-it-works-cta">
+                    <button class="btn btn-primary btn-lg" id="btn-start-now">Começar Agora</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section" id="products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nossos Produtos</h2>
+                    <p class="section-description">Escolha entre nossa variedade de produtos frescos e de qualidade.</p>
+                </div>
+                <div class="product-categories">
+                    <button class="category-btn active" data-category="all">Todos</button>
+                    <button class="category-btn" data-category="fruits">Frutas</button>
+                    <button class="category-btn" data-category="vegetables">Legumes</button>
+                    <button class="category-btn" data-category="meat">Carnes</button>
+                    <button class="category-btn" data-category="dairy">Laticínios</button>
+                    <button class="category-btn" data-category="bakery">Padaria</button>
+                </div>
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be added here dynamically -->
+                </div>
+                <div class="products-cta">
+                    <button class="btn btn-secondary btn-lg" id="btn-view-all-products">Ver Todos os Produtos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">O Que Dizem Nossos Clientes</h2>
+                    <p class="section-description">Veja o que nossos clientes estão falando sobre o serviço do Guri.</p>
+                </div>
+                <div class="testimonials-slider">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"O Guri mudou minha rotina! Agora tenho mais tempo para minha família enquanto alguém faz as compras para mim. O serviço é excelente e os produtos sempre chegam frescos."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="images/avatar-placeholder.svg" alt="Cliente 1">
+                            </div>
+                            <div class="author-info">
+                                <h4>Ana Silva</h4>
+                                <p>Cliente desde 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Serviço prático e eficiente! A taxa é justa pelo tempo que economizo. Recomendo para quem tem uma agenda apertada e valoriza a praticidade."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="images/avatar-placeholder.svg" alt="Cliente 2">
+                            </div>
+                            <div class="author-info">
+                                <h4>Carlos Oliveira</h4>
+                                <p>Cliente desde 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"A interface do site é super intuitiva e o processo de compra é rápido. Os produtos chegam exatamente como escolhi e no prazo combinado. Estou muito satisfeita!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="images/avatar-placeholder.svg" alt="Cliente 3">
+                            </div>
+                            <div class="author-info">
+                                <h4>Mariana Santos</h4>
+                                <p>Cliente desde 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-controls">
+                    <button class="testimonial-control prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="testimonial-control next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Pronto para economizar tempo?</h2>
+                    <p>Deixe o Guri fazer suas compras enquanto você aproveita seu tempo com o que realmente importa.</p>
+                    <button class="btn btn-primary btn-lg" id="btn-cta-shop">Fazer Pedido Agora</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>🛒 O Guri</h2>
+                    <p>Seu comprador pessoal</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Navegação</h3>
+                        <ul>
+                            <li><a href="#home">Início</a></li>
+                            <li><a href="#products">Produtos</a></li>
+                            <li><a href="#how-it-works">Como Funciona</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>Contato</h3>
+                        <ul>
+                            <li><a href="mailto:contato@oguri.com.br">contato@oguri.com.br</a></li>
+                            <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3>Redes Sociais</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 O Guri - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="admin-modal">
+        <div class="modal-content admin-modal-content">
+            <div class="modal-header">
+                <h2>Painel Administrativo</h2>
+                <button class="btn-close" id="btn-close-admin-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="products-tab">Produtos</button>
+                    <button class="admin-tab" data-tab="orders-tab">Pedidos</button>
+                    <button class="admin-tab" data-tab="users-tab">Usuários</button>
+                </div>
+                <div class="admin-tab-content">
+                    <!-- Products Tab -->
+                    <div class="tab-pane active" id="products-tab">
+                        <div class="admin-actions">
+                            <button class="btn btn-primary" id="btn-add-product">Adicionar Produto</button>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table" id="products-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Imagem</th>
+                                        <th>Nome</th>
+                                        <th>Preço</th>
+                                        <th>Estoque</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Product rows will be added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="tab-pane" id="orders-tab">
+                        <div class="admin-filters">
+                            <select id="order-status-filter">
+                                <option value="all">Todos os Status</option>
+                                <option value="pending">Pendente</option>
+                                <option value="paid">Pago</option>
+                                <option value="delivered">Entregue</option>
+                                <option value="cancelled">Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="admin-table-container">
+                            <table class="admin-table" id="orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Data</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Order rows will be added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Users Tab -->
+                    <div class="tab-pane" id="users-tab">
+                        <div class="admin-table-container">
+                            <table class="admin-table" id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Data de Cadastro</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- User rows will be added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div class="modal" id="product-form-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="product-form-title">Adicionar Produto</h2>
+                <button class="btn-close" id="btn-close-product-form">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <div class="form-group">
+                        <label for="product-name">Nome do Produto</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Descrição</label>
+                        <textarea id="product-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Preço (R$)</label>
+                        <input type="number" id="product-price" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-stock">Estoque</label>
+                        <input type="number" id="product-stock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Categoria</label>
+                        <select id="product-category">
+                            <option value="fruits">Frutas</option>
+                            <option value="vegetables">Legumes</option>
+                            <option value="meat">Carnes</option>
+                            <option value="dairy">Laticínios</option>
+                            <option value="bakery">Padaria</option>
+                            <option value="other">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Imagem URL</label>
+                        <input type="text" id="product-image-url" placeholder="URL da imagem">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-product">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="order-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes do Pedido</h2>
+                <button class="btn-close" id="btn-close-order-details">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="order-info">
+                    <div class="order-info-row">
+                        <span>Pedido #:</span>
+                        <span id="order-details-id"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Data:</span>
+                        <span id="order-details-date"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Cliente:</span>
+                        <span id="order-details-customer"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Endereço:</span>
+                        <span id="order-details-address"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Status:</span>
+                        <span id="order-details-status"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Método de Pagamento:</span>
+                        <span id="order-details-payment-method"></span>
+                    </div>
+                </div>
+                <div class="order-items">
+                    <h3>Itens do Pedido</h3>
+                    <table class="order-items-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order-details-items">
+                            <!-- Order items will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="order-details-subtotal"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Taxa de Serviço:</span>
+                        <span id="order-details-fee"></span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="order-details-total"></span>
+                    </div>
+                </div>
+                <div class="order-actions" id="order-admin-actions">
+                    <button class="btn btn-secondary" id="btn-update-status">Atualizar Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Orders Modal -->
+    <div class="modal" id="my-orders-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Meus Pedidos</h2>
+                <button class="btn-close" id="btn-close-my-orders">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="my-orders-list" id="my-orders-list">
+                    <!-- User orders will be added here dynamically -->
+                    <div class="empty-orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>Você ainda não fez nenhum pedido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Admin Button -->
+    <button class="floating-admin-btn" id="btn-admin-panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
